@@ -277,6 +277,25 @@ if (formulario) {
     formulario.addEventListener('submit', (evento) => {
         //evitamos que la pagina se recargue al enviar el formulario
         evento.preventDefault();
+        //comprobamos si algun campo esta vacio
+        let camposVacios = false;
+        //revisamos los campos de texto
+        if (campos.nombre.value.trim() === '' ||
+            campos.apellidoPaterno.value.trim() === '' ||
+            campos.apellidoMaterno.value.trim() === '' ||
+            campos.fechaNacimiento.value === '' ||
+            campos.sexo.value === '' ||
+            campos.ciudadNacimiento.value === '') {
+            //indicamos que hay por lo menos un campo vacio
+            camposVacios = true;
+        }
+        //si hay campos vacios detenemos el proceso
+        if (camposVacios) {
+            //avisamos al usuario que debe llenar todos los campos
+            alert('Completa todos los campos antes de generar la CURP.');
+            //detenemos el envio del formulario
+            return;
+        }
         //creamos un objeto con todos los datos normalizados del formulario
         const datos = {
             //normalizamos el nombre escrito por la persona
